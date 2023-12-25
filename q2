@@ -1,0 +1,41 @@
+n<-6
+m<-5
+snames<-c("a","b","c","d","e","f")
+cmarks<-matrix(c(10,20,30,40,50,
+                 60,70,80,90,10,
+                 20,30,40,50,60,
+                 70,80,90,10,20,
+                 30,40,50,60,70,
+                 80,90,10,20,30
+                 ),nrow=n,byrow="TRUE")
+print(cmarks)
+strecords<-list()
+for(i in 1:n)
+{
+    sname<-snames[i]
+    total<-sum(cmarks[i,])
+    avg=total/m;
+    grade<-ifelse(avg>=90,"A",
+    ifelse(avg>=80,"B",
+    ifelse(avg>=70,"C",
+    ifelse(avg>=60,"D",
+    ifelse(avg>=60,"E",
+    ifelse(avg<60,"F")   
+
+    )))))   // no space in ifelse and put comma after “A”
+    strecord<-list(name=sname,marks=cmarks[i,],total=total,average=avg,grade=grade)
+    strecords<-append(strecords,list(strecord))
+}
+cat("student information\n")
+for(i in strecords)
+{
+    print(i$name)
+    cat("\n")
+    print(i$marks)
+   cat("\n")
+    print(i$total)
+    cat("\n")
+    print(i$average)
+    cat("\n")
+    print(i$grade)
+}
