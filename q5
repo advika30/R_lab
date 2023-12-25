@@ -1,0 +1,67 @@
+library(dplyr)
+studentrecords<-data.frame(
+    usn=character(0),   //assigning
+    name=character(0),
+    ms=numeric(0),
+    ss=numeric(0),
+    hs=numeric(0),
+    att=numeric(0)
+)
+print(studentrecords)
+add<-function(USN,NAME,MS,SS,HS,ATT)
+{
+studentrecord<-data.frame(
+    usn=USN,
+    name=NAME,
+    ms=MS,
+    ss=SS,
+    hs=HS,
+    att=ATT
+)
+studentrecords<<-bind_rows(studentrecords,studentrecord)
+}
+average<-function()
+{
+      avg=studentrecords %>%
+        mutate(Averagescore=(ms+ss+hs)/3)%>%
+        select(usn,name,Averagescore,att)
+        return(avg)
+}
+la<-function(threshold)
+{
+      low=studentrecords %>%
+        filter(att<threshold)%>%
+        select(usn,name,att)
+        return(low)
+}
+genreport<-function()
+{
+  Average<-average()
+  print(Average)
+  lowattendance<-la(70)
+  print(lowattendance)
+}
+while(TRUE)
+{ 
+  cat("1.add 2.generate 3.exit")
+  ch=as.integer(readline("enter choice"))
+  if(ch==1)
+  {
+    USN=readline("usn")
+    NAME=readline("name")
+    MS=as.numeric(readline("maths score"))
+    SS=as.numeric(readline("science score"))
+    HS=as.numeric(readline("history score"))
+    ATT=as.numeric(readline("attendance"))
+    add(USN,NAME,MS,SS,HS,ATT)
+  }
+  else if(ch==2)
+  { 
+    genreport()
+  }
+  else
+  {
+    cat("thankyou!!!!!!")
+    break
+  }
+}
