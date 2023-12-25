@@ -1,0 +1,95 @@
+fineamt<-function(days)
+{
+   if(days<=7)
+   {
+       fine<-0
+   }
+   else if(days>7 && days<=15)
+   {
+       fine<-2*(days-7)
+   }
+   else if(days>15 && days<=30)
+   { 
+       fine<-2*8+3*(days-15)
+   }
+   else
+   {
+       fine<-2*8+3*15+30
+   }
+   return(fine)
+}
+days<-as.integer(readline("enter number of days overdue"))
+fines<-fineamt(days)
+print(fines)
+
+
+
+
+
+
+invi<-character(0)
+invq<-numeric(0)
+add_item<-function(item,qty)
+{
+    invi<<-c(invi,item)
+    invq<<-c(invq,qty)
+    cat("added\n")
+}
+update_qty<-function(item,new_qty)
+{
+    if(item %in% invi)
+    { 
+        index<-which(invi==item)
+        invq[index]<<-new_qty
+        cat("yes")
+    }
+    else
+    { 
+        cat("no")
+    }
+}
+display_inventory<-function()
+{
+    for(i in 1:length(invi))
+    { 
+        cat(sprintf("%s \t %d \n",invi[i],invq[i]))
+    }
+}
+remove_item<-function(item)
+{
+    if(item %in% invi)
+    {
+        index<-which(invi==item)
+        invi<<-invi(invi!=item)
+        invq<<-invq[-c(index)]
+        cat("removed")
+    }
+    else
+    {
+        cat("not removed")
+    }
+}
+while (TRUE) {
+  cat("\n1. Add Item\n2. Update Quantity\n3. Display Inventory\n4. Remove Item\n5. Exit\n")
+  choice <- as.integer(readline("Enter choice: "))
+
+  if (choice == 1) {
+    item <- readline("Enter item name: ")
+    qty <- as.integer(readline("Enter quantity: "))
+    add_item(item, qty)
+  } else if (choice == 2) {
+    item <- readline("Enter item name: ")
+    new_qty <- as.integer(readline("Enter new quantity: "))
+    update_qty(item, new_qty)
+  } else if (choice == 3) {
+    display_inventory()
+  } else if (choice == 4) {
+    item <- readline("Enter item name: ")
+    remove_item(item)
+  } else if (choice == 5) {
+    cat("Exiting the program. Goodbye!\n")
+    break
+  } else {
+    cat("Invalid choice. Please try again.\n")
+  }
+}
