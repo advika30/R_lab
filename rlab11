@@ -1,0 +1,25 @@
+library(readr)
+library(dplyr)
+library(readxl)
+
+purchase_data<-read_csv("/content/customerpurchases.csv")
+print(purchase_data)
+
+total_records<-nrow(purchase_data)
+print(total_records)
+
+unique<-n_distinct(purchase_data$Customer_ID)
+print(unique)
+
+pmean<-mean(purchase_data$Purchase_Amount)
+pmedian<-median(purchase_data$Purchase_Amount)
+psd<-sd(purchase_data$Purchase_Amount)
+print(pmean)
+print(pmedian)
+print(psd)
+
+purchase_data$segment<-ifelse(purchase_data$Purchase_Amount<pmedian,"low spender","high spender")
+print(purchase_data)
+
+hist<-ggplot(purchase_data,aes(x=Purchase_Amount))+geom_histogram(binwidth=30,color="green",fill="purple")+labs(title="histogram",x="Purchase_Amount",y="frequency")
+print(hist)
