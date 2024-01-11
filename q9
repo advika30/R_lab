@@ -1,0 +1,26 @@
+install.packages("gridExtra")
+library(ggplot2)
+library(gridExtra)
+set.seed(123)
+num<-15
+students<-data.frame(
+  Name=paste("s",1:num),
+  score=sample(60:100,num,replace=TRUE),
+  att=sample(60:100,num,replace=TRUE)
+)
+print(students)
+
+scatter_plot<-ggplot(students,aes(x=score,y=att))+geom_point(color="red")+labs(title="comparison",x="score",y="attendance")
+print(scatter_plot)
+
+bar<-ggplot(students,aes(x=Name,y=score))+geom_bar(stat="identity",fill="blue")+labs(title="comaprison",x="name",y="score")
+print(bar)
+
+students$time<-seq_len(num)
+line_plot<-ggplot(students,aes(x=time,y=score,group=1))+geom_line(color="purple")+labs(title="comparison",x="time",y="score")
+print(line_plot)
+
+histogram<-ggplot(students,aes(x=score))+geom_histogram(binwidth=10,fill="blue",color="pink")+labs(title="comaprison",x="score",y="frequency")
+print(histogram)
+
+grid.arrange(scatter_plot,bar,line_plot,histogram,nrow=2)
