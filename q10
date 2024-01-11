@@ -1,0 +1,36 @@
+library(dplyr)
+
+df=data.frame(
+  empid=c(1,2,3,4,5),
+  name=c("ashu","bob","linda","mia","kiara"),
+  age=c(25,35,45,24,23),
+  salary=c(10000,40000,30000,20000,50000),
+  dep=c("hr","finance","IT","hr","IT")
+)
+print(df)
+
+filter_data<-filter(df,age>25)
+print(filter_data)
+
+select_data<-select(df,name,age,salary)
+print(select_data)
+
+mutate_data<-mutate(df,newsal=salary*1.1)
+print(mutate_data)
+
+group_data<-group_by(df,dep)
+print(group_data)
+
+summarize_data<-summarize(group_data,avgsal=mean(salary),maxage=max(age))
+print(summarize_data)
+
+arrange_data<-arrange(df,age,desc(salary))
+print(arrange_data)
+
+df2=data.frame(
+  empid=c(1,2,3),
+  bonus=c(3000,5000,10000)
+)
+
+joined_data<-left_join(df,df2,by="empid")
+print(joined_data)
