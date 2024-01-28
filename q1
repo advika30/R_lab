@@ -29,8 +29,10 @@ for(item in carttoitem)
     for(p in allproducts)
     {
         if(product_name==p$name)
+        {
         product<-p
         break
+        }
     }
     if(!is.null(product))
     {
