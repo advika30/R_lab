@@ -1,6 +1,8 @@
 library(dplyr)
 library(ggplot2)
-customer_data <- data.frame(CustomerID = c(101, 102, 103, 104, 105),PurchaseAmount = c(150, 200, 120, 300, 80)
+customer_data <- data.frame(
+CustomerID = c(101, 102, 103, 104, 105),
+PurchaseAmount = c(150, 200, 120, 300, 80)
 )
 cat("Customer Purchase Data:\n")
 print(customer_data)
